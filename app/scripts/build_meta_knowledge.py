@@ -10,13 +10,17 @@ import argparse
 import asyncio
 from pathlib import Path
 
+from omegaconf import OmegaConf
+
 from app.clients.embedding_client_manager import embedding_client_manager
 from app.clients.es_client_manager import es_client_manager
 from app.clients.mysql_client_manager import (
     dw_mysql_client_manager,
     meta_mysql_client_manager,
+    olist_mysql_client_manager,
 )
 from app.clients.qdrant_client_manager import qdrant_client_manager
+from app.conf.meta_config import MetaConfig
 from app.repositories.es.value_es_repository import ValueESRepository
 from app.repositories.mysql.dw.dw_mysql_repository import DWMySQLRepository
 from app.repositories.mysql.meta.meta_mysql_repository import MetaMySQLRepository
@@ -32,6 +36,7 @@ async def build(config_path: Path):
     meta_mysql_client_manager.init()
     # 初始化数据仓库MySQL客户端
     dw_mysql_client_manager.init()
+    olist_mysql_client_manager.init()
     # 初始化Qdrant客户端
     qdrant_client_manager.init()
     # 初始化Embedding客户端
@@ -39,13 +44,20 @@ async def build(config_path: Path):
     # 初始化Elasticsearch客户端
     es_client_manager.init()
 
+    context = OmegaConf.load(config_path)
+    schema = OmegaConf.structured(MetaConfig)
+    meta_config: MetaConfig = OmegaConf.to_object(OmegaConf.merge(schema, context))
+
     async with (
         meta_mysql_client_manager.session_factory() as meta_session,
         dw_mysql_client_manager.session_factory() as dw_session,
+        olist_mysql_client_manager.session_factory() as olist_session,
     ):
         # 创建 repository 对象
         meta_mysql_repository = MetaMySQLRepository(meta_session)
-        dw_mysql_repository = DWMySQLRepository(dw_session)
+        dw_mysql_repository = DWMySQLRepository(
+            olist_session if meta_config.dataset == "olist" else dw_session
+        )
         # 字段和指标分别写入不同的 Qdrant collection，后续可以独立召回
         column_qdrant_repository = ColumnQdrantRepository(qdrant_client_manager.client)
         embedding_client = embedding_client_manager.client
@@ -68,6 +80,7 @@ async def build(config_path: Path):
     # 结束后关闭客户端连接
     await meta_mysql_client_manager.close()
     await dw_mysql_client_manager.close()
+    await olist_mysql_client_manager.close()
     await qdrant_client_manager.close()
     await es_client_manager.close()
 

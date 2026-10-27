@@ -21,3 +21,4 @@ class ColumnInfo:
     description: str
     alias: list[str]
     table_id: str
+    dataset: str = "dw"

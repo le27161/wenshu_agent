@@ -20,14 +20,19 @@ class ColumnQdrantRepository:
 
     collection_name = "column_info_collection"
 
-    def __init__(self, client: AsyncQdrantClient):
+    def __init__(self, client: AsyncQdrantClient, dataset: str = "dw"):
         self.client = client
+        self.dataset = dataset
+
+    @property
+    def active_collection_name(self) -> str:
+        return f"{self.collection_name}_{self.dataset}"
 
     async def ensure_collection(self):
         """确保字段向量集合存在，并按配置中的维度初始化"""
-        if not await self.client.collection_exists(self.collection_name):
+        if not await self.client.collection_exists(self.active_collection_name):
             await self.client.create_collection(
-                collection_name=self.collection_name,
+                collection_name=self.active_collection_name,
                 vectors_config=VectorParams(
                     size=app_config.qdrant.embedding_size, distance=Distance.COSINE
                 ),
@@ -47,7 +52,8 @@ class ColumnQdrantRepository:
         ]
         for i in range(0, len(points), batch_size):
             await self.client.upsert(
-                collection_name=self.collection_name, points=points[i : i + batch_size]
+                collection_name=self.active_collection_name,
+                points=points[i : i + batch_size],
             )
 
     async def search(
@@ -55,7 +61,7 @@ class ColumnQdrantRepository:
     ) -> list[ColumnInfo]:
         """按向量相似度检索字段元数据，并还原为 ColumnInfo 实体"""
         result = await self.client.query_points(
-            collection_name=self.collection_name,
+            collection_name=self.active_collection_name,
             query=embedding,
             limit=limit,
             score_threshold=score_threshold,

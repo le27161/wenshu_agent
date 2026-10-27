@@ -16,3 +16,4 @@ class TableInfo:
     name: str
     role: str
     description: str
+    dataset: str = "dw"

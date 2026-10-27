@@ -24,3 +24,10 @@ class ColumnMetricMySQL(Base):
     metric_id: Mapped[str] = mapped_column(
         String(64), primary_key=True, comment="指标编号"
     )
+    dataset: Mapped[str] = mapped_column(
+        String(32),
+        primary_key=True,
+        default="dw",
+        server_default="dw",
+        comment="数据集",
+    )

@@ -57,6 +57,7 @@ class MySQLClientManager:
 # 后续由不同 repository 按职责分别使用
 meta_mysql_client_manager = MySQLClientManager(app_config.db_meta)
 dw_mysql_client_manager = MySQLClientManager(app_config.db_dw)
+olist_mysql_client_manager = MySQLClientManager(app_config.db_olist)
 
 if __name__ == "__main__":
     dw_mysql_client_manager.init()

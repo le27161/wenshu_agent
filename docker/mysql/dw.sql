@@ -1,7 +1,7 @@
 SET NAMES utf8mb4;
 
 CREATE DATABASE IF NOT EXISTS dw DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON dw.* TO 'didilili'@'%';
+GRANT ALL PRIVILEGES ON dw.* TO 'appuser'@'%';
 USE dw;
 
 
@@ -45,7 +45,7 @@ VALUES ('C001', '李伟', '男', '黄金'),
        ('C010', '徐浩', '男', '白银'),
        ('C011', '孙丽', '女', '黄金'),
        ('C012', '马强', '男', '青铜'),
-       ('C013', '朱玲', '女', '白银'),
+       ('C013', 'Demo用户13', '女', '白银'),
        ('C014', '胡杰', '男', '黄金'),
        ('C015', '高梅', '女', '铂金'),
        ('C016', '林峰', '男', '青铜'),

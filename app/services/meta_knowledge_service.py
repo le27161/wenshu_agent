@@ -10,7 +10,10 @@
 
 import uuid
 from dataclasses import asdict
+from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
+from typing import Any
 
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from omegaconf import OmegaConf
@@ -27,6 +30,16 @@ from app.repositories.mysql.dw.dw_mysql_repository import DWMySQLRepository
 from app.repositories.mysql.meta.meta_mysql_repository import MetaMySQLRepository
 from app.repositories.qdrant.column_qdrant_repository import ColumnQdrantRepository
 from app.repositories.qdrant.metric_qdrant_repository import MetricQdrantRepository
+
+
+def _json_safe_value(value: Any) -> Any:
+    """把数据库原生值转换成 JSON/ES/Qdrant payload 安全的值。"""
+
+    if isinstance(value, (datetime, date)):
+        return value.isoformat(sep=" ") if isinstance(value, datetime) else value.isoformat()
+    if isinstance(value, Decimal):
+        return float(value)
+    return value
 
 
 class MetaKnowledgeService:
@@ -54,9 +67,7 @@ class MetaKnowledgeService:
         # 指标向量集合和字段向量集合分开管理，便于后续按对象类型独立召回
         self.metric_qdrant_repository: MetricQdrantRepository = metric_qdrant_repository
 
-    async def _save_tables_to_meta_db(
-        self, meta_config: MetaConfig
-    ) -> list[ColumnInfo]:
+    async def _save_tables_to_meta_db(self, meta_config: MetaConfig) -> list[ColumnInfo]:
         """把配置里的表字段信息补齐后写入 Meta MySQL"""
         table_infos: list[TableInfo] = []
         column_infos: list[ColumnInfo] = []
@@ -68,6 +79,7 @@ class MetaKnowledgeService:
                 name=table.name,
                 role=table.role,
                 description=table.description,
+                dataset=meta_config.dataset,
             )
             table_infos.append(table_info)
 
@@ -76,9 +88,12 @@ class MetaKnowledgeService:
 
             for column in table.columns:
                 # 这里只拿少量示例值，目的是让字段元数据更容易被人和模型理解
-                column_values = await self.dw_mysql_repository.get_column_values(
-                    table.name, column.name
-                )
+                column_values = [
+                    _json_safe_value(value)
+                    for value in await self.dw_mysql_repository.get_column_values(
+                        table.name, column.name
+                    )
+                ]
                 # 字段 id 使用 table.column 形式，后续在向量索引和全文索引里都会复用
                 column_info = ColumnInfo(
                     id=f"{table.name}.{column.name}",
@@ -89,6 +104,7 @@ class MetaKnowledgeService:
                     description=column.description,
                     alias=column.alias,
                     table_id=table.name,
+                    dataset=meta_config.dataset,
                 )
                 column_infos.append(column_info)
 
@@ -165,15 +181,17 @@ class MetaKnowledgeService:
             if sync:
                 # 这里拿的是字段真实值全集，不再是第 8 章里的少量 examples
                 current_column_values = (
-                    await self.dw_mysql_repository.get_column_values(
+                    _json_safe_value(value)
+                    for value in await self.dw_mysql_repository.get_column_values(
                         column_info.table_id, column_info.name, 100000
                     )
                 )
                 current_values_infos = [
                     ValueInfo(
-                        id=f"{column_info.id}.{current_column_value}",
-                        value=current_column_value,
+                        id=f"{meta_config.dataset}.{column_info.id}.{current_column_value}",
+                        value=str(current_column_value),
                         column_id=column_info.id,
+                        dataset=meta_config.dataset,
                     )
                     for current_column_value in current_column_values
                 ]
@@ -196,11 +214,14 @@ class MetaKnowledgeService:
                 description=metric.description,
                 relevant_columns=metric.relevant_columns,
                 alias=metric.alias,
+                dataset=meta_config.dataset,
             )
             metric_infos.append(metric_info)
             for column in metric.relevant_columns:
                 # ColumnMetric 单独表达“某个指标依赖某个字段”这层关系
-                column_metric = ColumnMetric(column_id=column, metric_id=metric.name)
+                column_metric = ColumnMetric(
+                    column_id=column, metric_id=metric.name, dataset=meta_config.dataset
+                )
                 column_metrics.append(column_metric)
 
         # 指标本身和字段关系要放在同一笔事务里，避免只写入其中一部分
@@ -264,6 +285,14 @@ class MetaKnowledgeService:
         context = OmegaConf.load(config_path)
         schema = OmegaConf.structured(MetaConfig)
         meta_config: MetaConfig = OmegaConf.to_object(OmegaConf.merge(schema, context))
+
+        self.column_qdrant_repository.dataset = meta_config.dataset
+        self.metric_qdrant_repository.dataset = meta_config.dataset
+        self.value_es_repository.dataset = meta_config.dataset
+
+        async with self.meta_mysql_repository.session.begin():
+            await self.meta_mysql_repository.ensure_enterprise_schema()
+            await self.meta_mysql_repository.clear_dataset(meta_config.dataset)
 
         # 根据配置文件判断后续要进入哪条构建链路
         if meta_config.tables:

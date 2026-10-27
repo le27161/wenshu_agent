@@ -31,3 +31,10 @@ class ColumnInfoMySQL(Base):
     description: Mapped[str | None] = mapped_column(Text, comment="列描述")
     alias: Mapped[dict | list | None] = mapped_column(JSON, comment="列别名")
     table_id: Mapped[str | None] = mapped_column(String(64), comment="所属表编号")
+    dataset: Mapped[str] = mapped_column(
+        String(32),
+        primary_key=True,
+        default="dw",
+        server_default="dw",
+        comment="数据集",
+    )

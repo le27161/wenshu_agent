@@ -7,8 +7,8 @@
 """
 
 import json
-
-from langchain_huggingface import HuggingFaceEndpointEmbeddings
+from datetime import datetime, timezone
+from uuid import uuid4
 
 from app.agent.context import DataAgentContext
 from app.agent.graph import graph
@@ -26,11 +26,11 @@ class QueryService:
     def __init__(
         self,
         meta_mysql_repository: MetaMySQLRepository,
-        embedding_client: HuggingFaceEndpointEmbeddings,
+        embedding_client: object,
         dw_mysql_repository: DWMySQLRepository,
-        column_qdrant_repository: ColumnQdrantRepository,
-        metric_qdrant_repository: MetricQdrantRepository,
-        value_es_repository: ValueESRepository,
+        qdrant_client: object,
+        es_client: object,
+        olist_mysql_repository: DWMySQLRepository,
     ):
         # MySQL 仓储分别负责元数据补全和真实数仓环境信息读取
         self.meta_mysql_repository = meta_mysql_repository
@@ -38,23 +38,24 @@ class QueryService:
 
         # 召回链路依赖的向量检索、Embedding 和全文检索能力由依赖层注入
         self.embedding_client = embedding_client
-        self.column_qdrant_repository = column_qdrant_repository
-        self.metric_qdrant_repository = metric_qdrant_repository
-        self.value_es_repository = value_es_repository
+        self.qdrant_client = qdrant_client
+        self.es_client = es_client
+        self.olist_mysql_repository = olist_mysql_repository
 
-    async def query(self, query: str):
+    async def query(self, query: str, dataset: str = "dw", principal: dict | None = None, conversation_id: str | None = None):
         """执行一次问数工作流，并逐段产出 SSE 消息"""
 
         # State 只放会被图节点读写和合并的业务数据，外部工具对象不塞进 State
-        state = DataAgentState(query=query)
+        state = DataAgentState(query=query, dataset=dataset, principal=principal or {"roles": ["admin"]}, conversation_id=conversation_id, request_id=str(uuid4()), started_at=datetime.now(timezone.utc))
         # Context 保存本次图执行需要复用的外部依赖，节点通过 runtime.context 读取
         context = DataAgentContext(
-            column_qdrant_repository=self.column_qdrant_repository,
+            column_qdrant_repository=ColumnQdrantRepository(self.qdrant_client, dataset),
             embedding_client=self.embedding_client,
-            metric_qdrant_repository=self.metric_qdrant_repository,
-            value_es_repository=self.value_es_repository,
+            metric_qdrant_repository=MetricQdrantRepository(self.qdrant_client, dataset),
+            value_es_repository=ValueESRepository(self.es_client, dataset),
             meta_mysql_repository=self.meta_mysql_repository,
             dw_mysql_repository=self.dw_mysql_repository,
+            olist_mysql_repository=self.olist_mysql_repository,
         )
         try:
             # stream_mode="custom" 对应节点内部 writer(...) 写出的进度消息

@@ -13,3 +13,4 @@ class ColumnMetric:
 
     column_id: str
     metric_id: str
+    dataset: str = "dw"

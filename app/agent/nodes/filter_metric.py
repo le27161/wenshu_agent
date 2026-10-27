@@ -38,14 +38,18 @@ async def filter_metric(state: DataAgentState, runtime: Runtime[DataAgentContext
         # LCEL 管道：填充提示词 -> 调用模型 -> 解析 JSON
         chain = prompt | llm | output_parser
 
-        result = await chain.ainvoke(
-            {
-                "query": query,
-                "metric_infos": yaml.dump(
-                    metric_infos, allow_unicode=True, sort_keys=False
-                ),
-            }
-        )
+        try:
+            result = await chain.ainvoke(
+                {
+                    "query": query,
+                    "metric_infos": yaml.dump(
+                        metric_infos, allow_unicode=True, sort_keys=False
+                    ),
+                }
+            )
+        except Exception as exc:
+            logger.warning(f"{step} LLM failed, keeping all candidates: {exc}")
+            result = [metric_info["name"] for metric_info in metric_infos]
         # 用模型返回的指标名称过滤原始结构，保留描述 依赖字段 别名等完整上下文
         filtered_metric_infos = [
             metric_info for metric_info in metric_infos if metric_info["name"] in result

@@ -15,3 +15,4 @@ class ValueInfo:
     id: str
     value: str
     column_id: str
+    dataset: str = "dw"

@@ -21,7 +21,8 @@ async def add_extra_context(state: DataAgentState, runtime: Runtime[DataAgentCon
     step = "添加额外上下文"
     writer({"type": "progress", "step": step, "status": "running"})
     try:
-        dw_mysql_repository = runtime.context["dw_mysql_repository"]
+        dataset = state.get("dataset", "dw")
+        dw_mysql_repository = runtime.context["olist_mysql_repository"] if dataset == "olist" else runtime.context["dw_mysql_repository"]
 
         # 当前日期信息会帮助模型处理“今天 本月 本季度 最近 N 天”等相对时间表达
         today = date.today()

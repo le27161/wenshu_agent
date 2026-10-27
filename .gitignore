@@ -4,7 +4,7 @@
 /tmp
 /out-tsc
 /bazel-out
-/node_modules
+node_modules/
 .npm-cache
 .angular/
 .pnpm-store/
@@ -16,6 +16,9 @@
 venv/
 env/
 .env
+.env.*
+!.env.example
+!.env.*.example
 __pycache__/
 *.py[cod]
 *$py.class
@@ -23,6 +26,13 @@ build/
 dist/
 wheels/
 *.egg-info
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.tsbuildinfo
 
 # Profiling
 chrome-profiler-events*.json
@@ -44,6 +54,9 @@ speed-measure-plugin*.json
 .history/*
 
 # Misc (build / logs)
+/.env
+/logs/
+*.log
 /.sass-cache
 /connect.lock
 /coverage
@@ -59,3 +72,7 @@ Thumbs.db
 
 # Local TEI embedding model files (large)
 docker/embedding/
+
+# Local datasets and generated query/benchmark output
+/data/
+/benchmarks/reports/

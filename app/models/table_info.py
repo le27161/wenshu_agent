@@ -21,3 +21,10 @@ class TableInfoMySQL(Base):
     name: Mapped[str | None] = mapped_column(String(128), comment="表名称")
     role: Mapped[str | None] = mapped_column(String(32), comment="表类型(fact/dim)")
     description: Mapped[str | None] = mapped_column(Text, comment="表描述")
+    dataset: Mapped[str] = mapped_column(
+        String(32),
+        primary_key=True,
+        default="dw",
+        server_default="dw",
+        comment="数据集",
+    )

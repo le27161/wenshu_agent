@@ -26,3 +26,10 @@ class MetricInfoMySQL(Base):
         JSON, comment="关联字段"
     )
     alias: Mapped[dict | list | None] = mapped_column(JSON, comment="指标别名")
+    dataset: Mapped[str] = mapped_column(
+        String(32),
+        primary_key=True,
+        default="dw",
+        server_default="dw",
+        comment="数据集",
+    )

@@ -43,7 +43,11 @@ async def recall_metric(state: DataAgentState, runtime: Runtime[DataAgentContext
         # LCEL 管道：填充提示词 -> 调用模型 -> 解析 JSON
         chain = prompt | llm | output_parser
 
-        result = await chain.ainvoke({"query": query})
+        try:
+            result = await chain.ainvoke({"query": query})
+        except Exception as exc:
+            logger.warning(f"指标召回扩展失败，改用原始关键词: {exc}")
+            result = []
 
         # 通用关键词和指标扩展词都参与召回，提升同义指标的命中率
         keywords = set(keywords + result)

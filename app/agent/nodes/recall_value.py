@@ -43,7 +43,11 @@ async def recall_value(state: DataAgentState, runtime: Runtime[DataAgentContext]
         # LCEL 管道：填充提示词 -> 调用模型 -> 解析 JSON
         chain = prompt | llm | output_parser
 
-        result = await chain.ainvoke({"query": query})
+        try:
+            result = await chain.ainvoke({"query": query})
+        except Exception as exc:
+            logger.warning(f"字段值召回扩展失败，改用原始关键词: {exc}")
+            result = []
 
         # 通用关键词和字段值扩展词一起检索 ES，尽量提高真实取值召回率
         keywords = set(keywords + result)

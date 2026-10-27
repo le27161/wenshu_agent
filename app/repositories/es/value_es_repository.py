@@ -32,14 +32,19 @@ class ValueESRepository:
         },
     }
 
-    def __init__(self, client: AsyncElasticsearch):
+    def __init__(self, client: AsyncElasticsearch, dataset: str = "dw"):
         self.client = client
+        self.dataset = dataset
+
+    @property
+    def active_index_name(self) -> str:
+        return f"{self.index_name}_{self.dataset}"
 
     async def ensure_index(self):
         """确保字段取值索引已经创建好"""
-        if not await self.client.indices.exists(index=self.index_name):
+        if not await self.client.indices.exists(index=self.active_index_name):
             await self.client.indices.create(
-                index=self.index_name, mappings=self.index_mappings
+                index=self.active_index_name, mappings=self.index_mappings
             )
 
     async def index(self, value_infos: list[ValueInfo], batch_size=20):
@@ -53,7 +58,7 @@ class ValueESRepository:
             for value_info in batch_value_infos:
                 # 用 ValueInfo.id 作为文档 id，这样重复构建时会覆盖同一条值记录
                 batch_operations.append(
-                    {"index": {"_index": self.index_name, "_id": value_info.id}}
+                    {"index": {"_index": self.active_index_name, "_id": value_info.id}}
                 )
                 batch_operations.append(asdict(value_info))
             await self.client.bulk(operations=batch_operations)
@@ -64,7 +69,7 @@ class ValueESRepository:
         """按关键词全文检索字段取值，并还原为 ValueInfo 实体"""
 
         resp = await self.client.search(
-            index=self.index_name,
+            index=self.active_index_name,
             # value 字段启用了 IK 分词，match 查询可以处理中文短语和枚举值匹配
             query={"match": {"value": keyword}},
             size=limit,

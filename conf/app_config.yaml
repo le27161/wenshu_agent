@@ -10,35 +10,42 @@ logging:
     level: INFO
 
 db_meta:
-  host: localhost
-  port: 3306
-  user: didilili
-  password: dili123
-  database: meta
+  host: ${oc.env:MYSQL_HOST,localhost}
+  port: ${oc.env:MYSQL_PORT,13308}
+  user: ${oc.env:MYSQL_USER,appuser}
+  password: ${oc.env:MYSQL_PASSWORD,change_me}
+  database: ${oc.env:MYSQL_META_DATABASE,meta}
 
 db_dw:
-  host: localhost
-  port: 3306
-  user: didilili
-  password: dili123
-  database: dw
+  host: ${oc.env:MYSQL_HOST,localhost}
+  port: ${oc.env:MYSQL_PORT,13308}
+  user: ${oc.env:MYSQL_USER,appuser}
+  password: ${oc.env:MYSQL_PASSWORD,change_me}
+  database: ${oc.env:MYSQL_DW_DATABASE,dw}
+
+db_olist:
+  host: ${oc.env:MYSQL_HOST,localhost}
+  port: ${oc.env:MYSQL_PORT,13308}
+  user: ${oc.env:MYSQL_USER,appuser}
+  password: ${oc.env:MYSQL_PASSWORD,change_me}
+  database: ${oc.env:MYSQL_OLIST_DATABASE,olist}
 
 qdrant:
-  host: localhost
-  port: 6333
-  embedding_size: 1024
+  host: ${oc.env:QDRANT_HOST,localhost}
+  port: ${oc.env:QDRANT_PORT,6333}
+  embedding_size: ${oc.env:QDRANT_EMBEDDING_SIZE,1024}
 
 embedding:
-  host: localhost
-  port: 8081
-  model: BAAI/bge-large-zh-v1.5
+  host: ${oc.env:EMBEDDING_HOST,localhost}
+  port: ${oc.env:EMBEDDING_PORT,8081}
+  model: ${oc.env:EMBEDDING_MODEL,BAAI/bge-large-zh-v1.5}
 
 es:
-  host: localhost
-  port: 9200
-  index_name: data_agent
+  host: ${oc.env:ELASTICSEARCH_HOST,localhost}
+  port: ${oc.env:ELASTICSEARCH_PORT,9200}
+  index_name: ${oc.env:ELASTICSEARCH_INDEX,data_agent}
 
 llm:
-  model_name: Pro/zai-org/GLM-5.1
+  model_name: ${oc.env:LLM_MODEL,qwen-plus}
   api_key: ${oc.env:LLM_API_KEY}
-  base_url: https://api.siliconflow.cn/v1
+  base_url: ${oc.env:LLM_BASE_URL,https://dashscope.aliyuncs.com/compatible-mode/v1}

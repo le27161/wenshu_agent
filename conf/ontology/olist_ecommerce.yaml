@@ -1,0 +1,226 @@
+dataset: olist
+
+entities:
+  Order:
+    table: fact_order
+    alias: o
+    role: fact
+    primary_key: order_id
+    description: Olist order fact entity.
+  OrderItem:
+    table: fact_order_item
+    alias: i
+    role: fact
+    primary_key: order_item_id
+    description: Olist order item fact entity.
+  Customer:
+    table: dim_customer
+    alias: c
+    role: dimension
+    primary_key: customer_id
+    description: Customer geography entity.
+  Product:
+    table: dim_product
+    alias: p
+    role: dimension
+    primary_key: product_id
+    description: Product category entity.
+  Seller:
+    table: dim_seller
+    alias: s
+    role: dimension
+    primary_key: seller_id
+    description: Seller geography entity.
+  Payment:
+    table: fact_payment
+    alias: pay
+    role: fact
+    primary_key: order_id
+    description: Order-level pre-aggregated payment entity.
+    from_sql: "(SELECT order_id, SUM(payment_value) AS payment_value, MAX(payment_type) AS payment_type FROM fact_payment GROUP BY order_id) pay"
+  Review:
+    table: fact_review
+    alias: r
+    role: fact
+    primary_key: order_id
+    description: Order-level pre-aggregated review entity.
+    from_sql: "(SELECT order_id, AVG(review_score) AS review_score, SUM(CASE WHEN review_score <= 2 THEN 1 ELSE 0 END) AS low_review_count, COUNT(review_id) AS review_count FROM fact_review GROUP BY order_id) r"
+
+relationships:
+  - name: order_items
+    from_entity: Order
+    to_entity: OrderItem
+    join: o.order_id = i.order_id
+  - name: order_customer
+    from_entity: Order
+    to_entity: Customer
+    join: o.customer_id = c.customer_id
+  - name: item_product
+    from_entity: OrderItem
+    to_entity: Product
+    join: i.product_id = p.product_id
+  - name: item_seller
+    from_entity: OrderItem
+    to_entity: Seller
+    join: i.seller_id = s.seller_id
+  - name: order_payment
+    from_entity: Order
+    to_entity: Payment
+    join: o.order_id = pay.order_id
+  - name: order_review
+    from_entity: Order
+    to_entity: Review
+    join: o.order_id = r.order_id
+
+dimensions:
+  product_category:
+    source_entity: Product
+    expression: p.product_category_name
+    aliases: [品类, 类目, category]
+  seller:
+    source_entity: OrderItem
+    expression: i.seller_id
+    aliases: [卖家, 商家]
+  seller_state:
+    source_entity: Seller
+    expression: s.seller_state
+    aliases: [卖家州]
+  customer_state:
+    source_entity: Customer
+    expression: c.customer_state
+    aliases: [客户州, 地区]
+  payment_type:
+    source_entity: Payment
+    expression: pay.payment_type
+    aliases: [支付方式]
+  order_status:
+    source_entity: Order
+    expression: o.order_status
+    aliases: [订单状态]
+  order_date:
+    source_entity: Order
+    expression: DATE(o.order_purchase_timestamp)
+    aliases: [日期, 下单日期]
+  product:
+    source_entity: OrderItem
+    expression: i.product_id
+    aliases: [商品, SKU]
+
+metrics:
+  gmv:
+    source_entity: OrderItem
+    family: item
+    expression: SUM(i.price)
+    time_field: o.order_purchase_timestamp
+    aliases: [销售额, 成交总额, GMV]
+    allowed_dimensions: "*"
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 商品明细价格之和。
+  order_count:
+    source_entity: Order
+    family: order
+    expression: COUNT(DISTINCT o.order_id)
+    time_field: o.order_purchase_timestamp
+    aliases: [订单数, 订单量]
+    allowed_dimensions: "*"
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 去重订单数。
+  item_count:
+    source_entity: OrderItem
+    family: item
+    expression: COUNT(*)
+    time_field: o.order_purchase_timestamp
+    aliases: [商品件数, 销量]
+    allowed_dimensions: "*"
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 订单商品明细件数。
+  aov:
+    source_entity: OrderItem
+    family: item
+    expression: SUM(i.price) / NULLIF(COUNT(DISTINCT o.order_id), 0)
+    time_field: o.order_purchase_timestamp
+    aliases: [客单价, 平均订单金额]
+    allowed_dimensions: "*"
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 商品明细销售额除以去重订单数。
+  payment_value:
+    source_entity: Payment
+    family: payment
+    expression: SUM(pay.payment_value)
+    time_field: o.order_purchase_timestamp
+    aliases: [支付金额]
+    allowed_dimensions: "*"
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 订单支付金额之和。
+  delivery_days:
+    source_entity: Order
+    family: order
+    expression: AVG(DATEDIFF(o.order_delivered_customer_date, o.order_purchase_timestamp))
+    time_field: o.order_purchase_timestamp
+    aliases: [配送天数, 平均配送天数]
+    allowed_dimensions: "*"
+    default_filter: "o.order_delivered_customer_date IS NOT NULL"
+    description: 从下单到客户收货的平均天数。
+  review_score:
+    source_entity: Review
+    family: review
+    expression: AVG(r.review_score)
+    time_field: o.order_purchase_timestamp
+    aliases: [评价分, 平均评价分]
+    allowed_dimensions: "*"
+    description: 平均评价分。
+  low_review_rate:
+    source_entity: Review
+    family: review
+    expression: SUM(r.low_review_count) / NULLIF(SUM(r.review_count), 0)
+    time_field: o.order_purchase_timestamp
+    aliases: [低评分率]
+    allowed_dimensions: "*"
+    description: 低分评价占比，低分定义为评价分小于等于 2。
+  cancel_rate:
+    source_entity: Order
+    family: order
+    expression: SUM(CASE WHEN o.order_status = 'canceled' THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0)
+    time_field: o.order_purchase_timestamp
+    aliases: [取消率]
+    allowed_dimensions: "*"
+    description: 取消订单占比。
+  seller_order_count:
+    source_entity: OrderItem
+    family: item
+    expression: COUNT(DISTINCT o.order_id)
+    time_field: o.order_purchase_timestamp
+    aliases: [商家订单量]
+    allowed_dimensions: [seller, seller_state, product_category]
+    default_filter: "o.order_status NOT IN ('canceled','unavailable')"
+    description: 按卖家相关维度统计的去重订单数。
+
+filters:
+  product_category:
+    expression: p.product_category_name
+    source_entities: [OrderItem, Product]
+  product_category_name:
+    expression: p.product_category_name
+    source_entities: [OrderItem, Product]
+  customer_state:
+    expression: c.customer_state
+    source_entities: [Customer]
+  seller_state:
+    expression: s.seller_state
+    source_entities: [OrderItem, Seller]
+  payment_type:
+    expression: pay.payment_type
+    source_entities: [Payment]
+  order_status:
+    expression: o.order_status
+    source_entities: [Order]
+  seller:
+    expression: i.seller_id
+    source_entities: [OrderItem]
+  product:
+    expression: i.product_id
+    source_entities: [OrderItem]
+
+enums:
+  order_status: [delivered, shipped, invoiced, processing, created, approved, canceled, unavailable]
+  payment_type: [credit_card, boleto, voucher, debit_card, not_defined]

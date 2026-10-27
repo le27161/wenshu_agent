@@ -45,6 +45,7 @@ function upsertStep(steps: StepState[] = [], event: Extract<AgentEvent, { type: 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
+  const [dataset, setDataset] = useState<"dw" | "olist">("dw");
   const [activeController, setActiveController] = useState<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -111,18 +112,41 @@ export default function App() {
             };
           }
 
+          if (
+            event.type === "dsl_generated" ||
+            event.type === "dsl_validated" ||
+            event.type === "sql_compiled" ||
+            event.type === "permission_applied" ||
+            event.type === "ast_validated" ||
+            event.type === "audit_recorded"
+          ) {
+            return {
+              ...message,
+              traces: [...(message.traces ?? []), event],
+            };
+          }
+
+          if (event.type === "error") {
+            return {
+              ...message,
+              status: "error",
+              content: "这次查询没有成功。",
+              error: event.message,
+            };
+          }
+
           return {
             ...message,
             status: "error",
             content: "这次查询没有成功。",
-            error: event.message,
+            error: "未知后端事件。",
           };
         }),
       );
     };
 
     try {
-      await streamQuery(query, { signal: controller.signal, onEvent });
+      await streamQuery(query, { signal: controller.signal, onEvent, dataset });
       setMessages((current) =>
         current.map((message) =>
           message.id === assistantId && message.status === "streaming"
@@ -173,7 +197,7 @@ export default function App() {
               </div>
               <div>
                 <div className="text-base font-semibold tracking-[0.02em]">电商问数</div>
-                <div className="text-xs text-ink/50">shopkeeper-agent</div>
+                <div className="text-xs text-ink/50">commerce-insight-agent</div>
               </div>
             </div>
           </div>
@@ -254,6 +278,28 @@ export default function App() {
               <Eraser className="h-4 w-4" aria-hidden="true" />
             </button>
           </header>
+
+          <div className="flex h-12 shrink-0 items-center justify-between border-b border-ink/10 bg-[#fffaf1]/70 px-4 lg:px-6">
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/45">
+              Dataset
+            </div>
+            <div className="grid grid-cols-2 border border-ink/15 bg-white/65 p-0.5">
+              {(["dw", "olist"] as const).map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  disabled={isStreaming}
+                  onClick={() => setDataset(item)}
+                  className={cn(
+                    "h-8 px-4 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45",
+                    dataset === item ? "bg-ink text-parchment" : "text-ink/55 hover:bg-ink/5 hover:text-ink",
+                  )}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
             {messages.length === 0 ? (

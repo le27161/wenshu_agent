@@ -3,9 +3,9 @@
   记录启动方式、代理配置和部署时的环境变量
 -->
 
-# Shopkeeper Agent Frontend
+# Commerce Insight Agent Frontend
 
-匹配后端 `shopkeeper-agent` 的问数聊天前端，技术栈为 React + Vite + Tailwind CSS + pnpm。
+匹配后端 `commerce-insight-agent` 的问数聊天前端，技术栈为 React + Vite + Tailwind CSS + pnpm。
 
 ## 启动
 

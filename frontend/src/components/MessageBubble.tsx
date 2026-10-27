@@ -2,7 +2,7 @@
  * 聊天消息气泡组件
  * 组合展示用户问题、智能体回复、执行流程和结果表格
  */
-import { Bot, Copy, UserRound } from "lucide-react";
+import { Bot, Copy, ShieldCheck, UserRound } from "lucide-react";
 import { ResultTable } from "./ResultTable";
 import { StepRail } from "./StepRail";
 import { cn, formatTime, toClipboardText } from "../lib/format";
@@ -55,6 +55,26 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
           )}
 
           {!isUser && <StepRail steps={message.steps} />}
+          {!isUser && message.traces && message.traces.length > 0 && (
+            <section className="mt-4 border border-ink/10 bg-white/45 px-4 py-3 shadow-line">
+              <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
+                <ShieldCheck className="h-4 w-4 text-moss" aria-hidden="true" />
+                治理轨迹
+              </div>
+              <div className="grid gap-2">
+                {message.traces.map((trace, index) => (
+                  <details key={`${trace.type}-${index}`} className="border border-ink/10 bg-white/55 px-3 py-2">
+                    <summary className="cursor-pointer text-sm font-semibold text-ink/75">
+                      {traceLabels[trace.type] ?? trace.type}
+                    </summary>
+                    <pre className="mt-2 max-h-56 overflow-auto whitespace-pre-wrap break-words text-xs leading-5 text-ink/65">
+                      {JSON.stringify(trace.sql ? { sql: trace.sql, explanation: trace.explanation } : trace.data, null, 2)}
+                    </pre>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
           {!isUser && message.result !== undefined && <ResultTable data={message.result} />}
 
           <div
@@ -76,3 +96,12 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
     </article>
   );
 }
+
+const traceLabels: Record<string, string> = {
+  dsl_generated: "DSL 生成",
+  dsl_validated: "DSL 校验",
+  sql_compiled: "SQL 编译",
+  permission_applied: "权限注入",
+  ast_validated: "AST 校验",
+  audit_recorded: "审计记录",
+};

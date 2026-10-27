@@ -57,5 +57,6 @@ class MetaConfig:
     tables 和 metrics 都允许为空 便于分阶段只构建其中一部分
     """
 
+    dataset: str = "dw"
     tables: Optional[list[TableConfig]] = None
     metrics: Optional[list[MetricConfig]] = None

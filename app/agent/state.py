@@ -7,7 +7,8 @@ State 是 LangGraph 各节点之间传递和更新的共享数据
 SQL 生成闭环会继续写入候选 SQL 以及校验错误信息，用于控制校正或执行分支
 """
 
-from typing import TypedDict
+from datetime import datetime
+from typing import NotRequired, TypedDict
 
 from app.entities.column_info import ColumnInfo
 from app.entities.metric_info import MetricInfo
@@ -77,3 +78,17 @@ class DataAgentState(TypedDict):
     sql: str  # 生成或校正后的SQL
 
     error: str  # 校验SQL时出现的错误信息
+    dataset: NotRequired[str]
+    principal: NotRequired[dict]
+    conversation_id: NotRequired[str | None]
+    dsl: NotRequired[dict]
+    compiled_sql: NotRequired[str]
+    final_sql: NotRequired[str]
+    audit: NotRequired[dict]
+    request_id: NotRequired[str]
+    started_at: NotRequired[datetime]
+    result: NotRequired[list[dict]]
+    row_count: NotRequired[int]
+    policy: NotRequired[dict]
+    ast_validation: NotRequired[dict]
+    compile_explanation: NotRequired[dict]

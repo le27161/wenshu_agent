@@ -22,6 +22,7 @@ class TableInfoMapper:
             name=table_info_mysql.name,
             role=table_info_mysql.role,
             description=table_info_mysql.description,
+            dataset=getattr(table_info_mysql, "dataset", "dw"),
         )
 
     @staticmethod

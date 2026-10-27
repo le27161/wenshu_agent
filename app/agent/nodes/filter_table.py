@@ -38,14 +38,23 @@ async def filter_table(state: DataAgentState, runtime: Runtime[DataAgentContext]
         # LCEL 管道：填充提示词 -> 调用模型 -> 解析 JSON
         chain = prompt | llm | output_parser
 
-        result = await chain.ainvoke(
-            {
-                "query": query,
-                "table_infos": yaml.dump(
-                    table_infos, allow_unicode=True, sort_keys=False
-                ),
+        try:
+            result = await chain.ainvoke(
+                {
+                    "query": query,
+                    "table_infos": yaml.dump(
+                        table_infos, allow_unicode=True, sort_keys=False
+                    ),
+                }
+            )
+        except Exception as exc:
+            logger.warning(f"{step} LLM failed, keeping all candidates: {exc}")
+            result = {
+                table_info["name"]: [
+                    column_info["name"] for column_info in table_info["columns"]
+                ]
+                for table_info in table_infos
             }
-        )
         # 模型只负责选择，程序根据选择结果从原始 TableInfoState 中裁剪，避免模型重写复杂结构出错
         filtered_table_infos: list[TableInfoState] = []
         for table_info in table_infos:

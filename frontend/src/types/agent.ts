@@ -15,12 +15,25 @@ export type ResultEvent = {
   data: unknown;
 };
 
+export type TraceEvent = {
+  type:
+    | "dsl_generated"
+    | "dsl_validated"
+    | "sql_compiled"
+    | "permission_applied"
+    | "ast_validated"
+    | "audit_recorded";
+  data?: unknown;
+  sql?: string;
+  explanation?: unknown;
+};
+
 export type ErrorEvent = {
   type: "error";
   message: string;
 };
 
-export type AgentEvent = ProgressEvent | ResultEvent | ErrorEvent;
+export type AgentEvent = ProgressEvent | ResultEvent | TraceEvent | ErrorEvent;
 
 export type StepState = {
   step: string;
@@ -35,6 +48,7 @@ export type ChatMessage = {
   createdAt: number;
   status?: "streaming" | "done" | "error";
   steps?: StepState[];
+  traces?: TraceEvent[];
   result?: unknown;
   error?: string;
 };

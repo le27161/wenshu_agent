@@ -21,7 +21,7 @@ export function EmptyState({ examples, onUseExample }: EmptyStateProps) {
       <div className="mb-10 max-w-3xl">
         <div className="mb-5 inline-flex items-center gap-2 border border-moss/25 bg-moss/10 px-3 py-1.5 text-sm font-semibold text-moss">
           <Sparkles className="h-4 w-4" aria-hidden="true" />
-          Shopkeeper Agent
+          Commerce Insight Agent
         </div>
         <h1 className="text-balance text-4xl font-semibold leading-tight text-ink sm:text-6xl">
           电商问数

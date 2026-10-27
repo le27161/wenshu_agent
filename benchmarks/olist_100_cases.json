@@ -1,0 +1,4136 @@
+[
+  {
+    "id": "olist-001",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 全年的销售额，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-002",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年 1-8 月的销售额，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-003",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 年上半年的销售额，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-004",
+    "dataset": "olist",
+    "question": "按支付方式统计2017 年下半年的销售额，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-005",
+    "dataset": "olist",
+    "question": "按订单状态统计2018 年上半年的销售额，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-006",
+    "dataset": "olist",
+    "question": "按下单日期统计2017 年二季度的销售额，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-007",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年四季度的订单数，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-008",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年一季度的订单数，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-009",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年二季度的订单数，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-010",
+    "dataset": "olist",
+    "question": "按支付方式统计Olist 全周期的订单数，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-011",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 全年的订单数，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-012",
+    "dataset": "olist",
+    "question": "按下单日期统计2018 年 1-8 月的订单数，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-013",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年上半年的商品件数，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-014",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年下半年的商品件数，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-015",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年上半年的商品件数，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-016",
+    "dataset": "olist",
+    "question": "按支付方式统计2017 年二季度的商品件数，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-017",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 年四季度的商品件数，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-018",
+    "dataset": "olist",
+    "question": "按下单日期统计2018 年一季度的商品件数，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-019",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年二季度的客单价，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-020",
+    "dataset": "olist",
+    "question": "按客户州统计Olist 全周期的客单价，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-021",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 全年的客单价，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-022",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年 1-8 月的客单价，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-023",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 年上半年的客单价，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-024",
+    "dataset": "olist",
+    "question": "按下单日期统计2017 年下半年的客单价，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-025",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年上半年的支付金额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-026",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年二季度的支付金额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-027",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 年四季度的支付金额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-028",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年一季度的支付金额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-029",
+    "dataset": "olist",
+    "question": "按订单状态统计2018 年二季度的支付金额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-030",
+    "dataset": "olist",
+    "question": "按下单日期统计Olist 全周期的支付金额，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-031",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 全年的平均配送天数，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-032",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年 1-8 月的平均配送天数，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-033",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 年上半年的平均配送天数，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-034",
+    "dataset": "olist",
+    "question": "按支付方式统计2017 年下半年的平均配送天数，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-035",
+    "dataset": "olist",
+    "question": "按订单状态统计2018 年上半年的平均配送天数，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-036",
+    "dataset": "olist",
+    "question": "按下单日期统计2017 年二季度的平均配送天数，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-037",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年四季度的平均评价分，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-038",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年一季度的平均评价分，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-039",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年二季度的平均评价分，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-040",
+    "dataset": "olist",
+    "question": "按支付方式统计Olist 全周期的平均评价分，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-041",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 全年的平均评价分，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-042",
+    "dataset": "olist",
+    "question": "按下单日期统计2018 年 1-8 月的平均评价分，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-043",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年上半年的低评分率，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-044",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年下半年的低评分率，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-045",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年上半年的低评分率，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-046",
+    "dataset": "olist",
+    "question": "按支付方式统计2017 年二季度的低评分率，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-047",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 年四季度的低评分率，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-048",
+    "dataset": "olist",
+    "question": "按下单日期统计2018 年一季度的低评分率，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-049",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年二季度的取消率，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-050",
+    "dataset": "olist",
+    "question": "按客户州统计Olist 全周期的取消率，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-051",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 全年的取消率，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-052",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年 1-8 月的取消率，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-053",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 年上半年的取消率，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-054",
+    "dataset": "olist",
+    "question": "按下单日期统计2017 年下半年的取消率，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-055",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年上半年的商家订单量，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "seller_order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-056",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年二季度的商家订单量，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "seller_order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-057",
+    "dataset": "olist",
+    "question": "按卖家统计2017 年四季度的商家订单量，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count"
+      ],
+      "dimensions": [
+        "seller"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller",
+        "seller_order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-058",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年一季度的销售额、商品件数，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-059",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年二季度的销售额、商品件数，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-060",
+    "dataset": "olist",
+    "question": "按卖家州统计Olist 全周期的销售额、商品件数，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-061",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 全年的销售额、商品件数，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-062",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年 1-8 月的销售额、订单数、客单价，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-063",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年上半年的销售额、订单数、客单价，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-064",
+    "dataset": "olist",
+    "question": "按下单日期统计2017 年下半年的销售额、订单数、客单价，按下单日期升序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "gmv",
+        "order_count",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-065",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年上半年的支付金额、销售额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value",
+        "gmv"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "payment_value",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-066",
+    "dataset": "olist",
+    "question": "按支付方式统计2017 年二季度的支付金额、订单数，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value",
+        "order_count"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "payment_value",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-067",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年四季度的支付金额、销售额，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value",
+        "gmv"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "payment_value",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-068",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年一季度的平均评价分、低评分率，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score",
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "review_score",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-069",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年二季度的平均评价分、低评分率，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score",
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "review_score",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-070",
+    "dataset": "olist",
+    "question": "按卖家州统计Olist 全周期的平均评价分、低评分率，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score",
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "review_score",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-071",
+    "dataset": "olist",
+    "question": "按客户州统计2017 全年的平均配送天数、平均评价分，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days",
+        "review_score"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "delivery_days",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-072",
+    "dataset": "olist",
+    "question": "按订单状态统计2018 年 1-8 月的平均配送天数、平均评价分，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days",
+        "review_score"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "delivery_days",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-073",
+    "dataset": "olist",
+    "question": "按订单状态统计2017 年上半年的取消率、订单数，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate",
+        "order_count"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "cancel_rate",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-074",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 年下半年的商家订单量、销售额，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count",
+        "gmv"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "seller_order_count",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-075",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年上半年的商家订单量、销售额，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count",
+        "gmv"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "seller_order_count",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-076",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年二季度的销售额，条件：订单状态为delivered，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-077",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年四季度的订单数，条件：订单状态为delivered，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-078",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年一季度的商品件数，条件：订单状态为delivered，按商品件数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "item_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "item_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-079",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年二季度的客单价，条件：订单状态为delivered，按客单价降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "aov"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "aov",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "aov"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-080",
+    "dataset": "olist",
+    "question": "按支付方式统计Olist 全周期的支付金额，条件：支付方式为credit_card，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [
+        {
+          "field": "payment_type",
+          "operator": "eq",
+          "value": "credit_card"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-081",
+    "dataset": "olist",
+    "question": "按客户州统计2017 全年的支付金额，条件：支付方式为boleto，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "payment_type",
+          "operator": "eq",
+          "value": "boleto"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "payment_value"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-082",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年 1-8 月的平均评价分，条件：客户州为SP，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "customer_state",
+          "operator": "eq",
+          "value": "SP"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-083",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年上半年的低评分率，条件：卖家州为SP，按低评分率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "seller_state",
+          "operator": "eq",
+          "value": "SP"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "low_review_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-084",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年下半年的平均配送天数，条件：客户州为RJ，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "customer_state",
+          "operator": "eq",
+          "value": "RJ"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "delivery_days"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-085",
+    "dataset": "olist",
+    "question": "按客户州统计2018 年上半年的取消率，条件：订单状态属于delivered,canceled，按取消率降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "in",
+          "value": [
+            "delivered",
+            "canceled"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "cancel_rate",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-086",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年二季度的销售额、订单数，条件：商品品类为beleza_saude，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "order_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "product_category",
+          "operator": "eq",
+          "value": "beleza_saude"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv",
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-087",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年四季度的销售额、商品件数，条件：商品品类为cama_mesa_banho，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "product_category",
+          "operator": "eq",
+          "value": "cama_mesa_banho"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-088",
+    "dataset": "olist",
+    "question": "按卖家州统计2018 年一季度的销售额、商品件数，条件：卖家州属于SP,MG,PR，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "item_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [
+        {
+          "field": "seller_state",
+          "operator": "in",
+          "value": [
+            "SP",
+            "MG",
+            "PR"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "gmv",
+        "item_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-089",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年二季度的支付金额、销售额，条件：支付方式属于credit_card,boleto，按支付金额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "payment_value",
+        "gmv"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [
+        {
+          "field": "payment_type",
+          "operator": "in",
+          "value": [
+            "credit_card",
+            "boleto"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "payment_value",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "payment_value",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-090",
+    "dataset": "olist",
+    "question": "按客户州统计Olist 全周期的平均评价分、低评分率，条件：客户州属于SP,RJ,MG，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "review_score",
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "customer_state",
+          "operator": "in",
+          "value": [
+            "SP",
+            "RJ",
+            "MG"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "review_score",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-091",
+    "dataset": "olist",
+    "question": "按卖家州统计2017 全年的商家订单量，条件：卖家州为SP，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count"
+      ],
+      "dimensions": [
+        "seller_state"
+      ],
+      "filters": [
+        {
+          "field": "seller_state",
+          "operator": "eq",
+          "value": "SP"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "seller_state",
+        "seller_order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-092",
+    "dataset": "olist",
+    "question": "按商品品类统计2018 年 1-8 月的商家订单量、销售额，条件：卖家州为SP，按商家订单量降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "seller_order_count",
+        "gmv"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "seller_state",
+          "operator": "eq",
+          "value": "SP"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "seller_order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "seller_order_count",
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-093",
+    "dataset": "olist",
+    "question": "统计整体2017 年上半年的销售额，条件：客户州为SP，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "aggregate",
+      "metrics": [
+        "gmv"
+      ],
+      "dimensions": [],
+      "filters": [
+        {
+          "field": "customer_state",
+          "operator": "eq",
+          "value": "SP"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "gmv"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-094",
+    "dataset": "olist",
+    "question": "统计整体2017 年下半年的订单数，条件：支付方式为credit_card，按订单数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "aggregate",
+      "metrics": [
+        "order_count"
+      ],
+      "dimensions": [],
+      "filters": [
+        {
+          "field": "payment_type",
+          "operator": "eq",
+          "value": "credit_card"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-07-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "order_count",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_count"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-095",
+    "dataset": "olist",
+    "question": "统计整体2018 年上半年的平均评价分，条件：订单状态为delivered，按平均评价分降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "aggregate",
+      "metrics": [
+        "review_score"
+      ],
+      "dimensions": [],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "review_score",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-096",
+    "dataset": "olist",
+    "question": "按客户州统计2017 年二季度的销售额、支付金额、平均评价分，条件：客户州属于SP,RJ,MG，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "payment_value",
+        "review_score"
+      ],
+      "dimensions": [
+        "customer_state"
+      ],
+      "filters": [
+        {
+          "field": "customer_state",
+          "operator": "in",
+          "value": [
+            "SP",
+            "RJ",
+            "MG"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-04-01",
+        "end": "2017-07-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "customer_state",
+        "gmv",
+        "payment_value",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-097",
+    "dataset": "olist",
+    "question": "按商品品类统计2017 年四季度的销售额、支付金额、平均评价分，条件：订单状态为delivered，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "payment_value",
+        "review_score"
+      ],
+      "dimensions": [
+        "product_category"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-10-01",
+        "end": "2018-01-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "product_category",
+        "gmv",
+        "payment_value",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-098",
+    "dataset": "olist",
+    "question": "按支付方式统计2018 年一季度的销售额、支付金额、低评分率，条件：支付方式为credit_card，按销售额降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "payment_value",
+        "low_review_rate"
+      ],
+      "dimensions": [
+        "payment_type"
+      ],
+      "filters": [
+        {
+          "field": "payment_type",
+          "operator": "eq",
+          "value": "credit_card"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-01-01",
+        "end": "2018-04-01"
+      },
+      "order_by": [
+        {
+          "field": "gmv",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "payment_type",
+        "gmv",
+        "payment_value",
+        "low_review_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-099",
+    "dataset": "olist",
+    "question": "按订单状态统计2018 年二季度的平均配送天数、取消率，条件：订单状态属于delivered,canceled，按平均配送天数降序返回前 20 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "delivery_days",
+        "cancel_rate"
+      ],
+      "dimensions": [
+        "order_status"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "in",
+          "value": [
+            "delivered",
+            "canceled"
+          ]
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2018-04-01",
+        "end": "2018-07-01"
+      },
+      "order_by": [
+        {
+          "field": "delivery_days",
+          "direction": "desc"
+        }
+      ],
+      "limit": 20,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_status",
+        "delivery_days",
+        "cancel_rate"
+      ],
+      "min_rows": 1
+    }
+  },
+  {
+    "id": "olist-100",
+    "dataset": "olist",
+    "question": "按下单日期统计Olist 全周期的销售额、订单数、平均评价分，条件：订单状态为delivered，按下单日期升序返回前 30 条。",
+    "dsl": {
+      "version": "1.0",
+      "dataset": "olist",
+      "intent": "ranking",
+      "metrics": [
+        "gmv",
+        "order_count",
+        "review_score"
+      ],
+      "dimensions": [
+        "order_date"
+      ],
+      "filters": [
+        {
+          "field": "order_status",
+          "operator": "eq",
+          "value": "delivered"
+        }
+      ],
+      "time_range": {
+        "type": "absolute",
+        "start": "2017-01-01",
+        "end": "2018-09-01"
+      },
+      "order_by": [
+        {
+          "field": "order_date",
+          "direction": "asc"
+        }
+      ],
+      "limit": 30,
+      "output": {
+        "format": "table"
+      }
+    },
+    "assertions": {
+      "expected_columns": [
+        "order_date",
+        "gmv",
+        "order_count",
+        "review_score"
+      ],
+      "min_rows": 1
+    }
+  }
+]

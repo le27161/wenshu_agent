@@ -1,0 +1,194 @@
+dataset: olist
+
+tables:
+  - name: fact_order
+    role: fact
+    description: Olist 订单事实表，记录订单状态、客户和关键订单时间。
+    columns:
+      - name: order_id
+        role: primary_key
+        description: 订单唯一标识。
+        alias: [订单ID, 订单编号]
+        sync: false
+      - name: customer_id
+        role: foreign_key
+        description: 关联客户维度的外键。
+        alias: [客户ID, 买家ID]
+        sync: false
+      - name: order_status
+        role: dimension
+        description: 订单状态。
+        alias: [订单状态, 状态]
+        sync: true
+      - name: order_purchase_timestamp
+        role: dimension
+        description: 订单购买时间。
+        alias: [下单时间, 购买时间]
+        sync: false
+      - name: order_delivered_customer_date
+        role: dimension
+        description: 订单送达客户时间。
+        alias: [送达时间, 签收时间]
+        sync: false
+
+  - name: fact_order_item
+    role: fact
+    description: Olist 订单商品明细事实表，记录商品、卖家、价格和运费。
+    columns:
+      - name: order_id
+        role: foreign_key
+        description: 关联订单事实表的外键。
+        alias: [订单ID]
+        sync: false
+      - name: order_item_id
+        role: primary_key
+        description: 订单内商品序号。
+        alias: [订单商品序号, 明细序号]
+        sync: false
+      - name: product_id
+        role: foreign_key
+        description: 关联商品维度的外键。
+        alias: [商品ID, SKU]
+        sync: false
+      - name: seller_id
+        role: foreign_key
+        description: 关联卖家维度的外键。
+        alias: [卖家ID, 商家ID]
+        sync: false
+      - name: price
+        role: measure
+        description: 商品明细成交价格。
+        alias: [商品金额, 成交价格, GMV]
+        sync: false
+      - name: freight_value
+        role: measure
+        description: 商品明细运费。
+        alias: [运费]
+        sync: false
+
+  - name: fact_payment
+    role: fact
+    description: Olist 支付事实表，记录订单支付方式、分期数和支付金额。
+    columns:
+      - name: order_id
+        role: foreign_key
+        description: 关联订单事实表的外键。
+        alias: [订单ID]
+        sync: false
+      - name: payment_sequential
+        role: primary_key
+        description: 同一订单内支付记录序号。
+        alias: [支付序号]
+        sync: false
+      - name: payment_type
+        role: dimension
+        description: 支付方式。
+        alias: [支付方式, 付款方式]
+        sync: true
+      - name: payment_value
+        role: measure
+        description: 支付金额。
+        alias: [支付金额, 付款金额]
+        sync: false
+
+  - name: fact_review
+    role: fact
+    description: Olist 评价事实表，记录订单评分和评价内容。
+    columns:
+      - name: review_id
+        role: primary_key
+        description: 评价唯一标识。
+        alias: [评价ID]
+        sync: false
+      - name: order_id
+        role: foreign_key
+        description: 关联订单事实表的外键。
+        alias: [订单ID]
+        sync: false
+      - name: review_score
+        role: measure
+        description: 评价分数。
+        alias: [评分, 评价分]
+        sync: false
+
+  - name: dim_customer
+    role: dim
+    description: Olist 客户维度表，记录客户城市和州。
+    columns:
+      - name: customer_id
+        role: primary_key
+        description: 客户唯一标识。
+        alias: [客户ID]
+        sync: false
+      - name: customer_city
+        role: dimension
+        description: 客户城市。
+        alias: [客户城市, 城市]
+        sync: true
+      - name: customer_state
+        role: dimension
+        description: 客户州。
+        alias: [客户州, 地区, 州]
+        sync: true
+
+  - name: dim_product
+    role: dim
+    description: Olist 商品维度表，记录商品品类和规格属性。
+    columns:
+      - name: product_id
+        role: primary_key
+        description: 商品唯一标识。
+        alias: [商品ID, SKU]
+        sync: false
+      - name: product_category_name
+        role: dimension
+        description: 商品品类。
+        alias: [品类, 类目, 商品类目]
+        sync: true
+
+  - name: dim_seller
+    role: dim
+    description: Olist 卖家维度表，记录卖家城市和州。
+    columns:
+      - name: seller_id
+        role: primary_key
+        description: 卖家唯一标识。
+        alias: [卖家ID, 商家ID]
+        sync: false
+      - name: seller_city
+        role: dimension
+        description: 卖家城市。
+        alias: [卖家城市]
+        sync: true
+      - name: seller_state
+        role: dimension
+        description: 卖家州。
+        alias: [卖家州, 商家州]
+        sync: true
+
+metrics:
+  - name: gmv
+    description: Olist 商品明细成交金额之和。
+    relevant_columns:
+      - fact_order_item.price
+    alias: [销售额, 成交总额, GMV]
+  - name: order_count
+    description: Olist 去重订单数。
+    relevant_columns:
+      - fact_order.order_id
+    alias: [订单数, 订单量]
+  - name: item_count
+    description: Olist 订单商品明细件数。
+    relevant_columns:
+      - fact_order_item.order_item_id
+    alias: [销量, 商品件数]
+  - name: payment_value
+    description: Olist 支付金额之和。
+    relevant_columns:
+      - fact_payment.payment_value
+    alias: [支付金额, 付款金额]
+  - name: review_score
+    description: Olist 平均评价分。
+    relevant_columns:
+      - fact_review.review_score
+    alias: [评价分, 平均评分]

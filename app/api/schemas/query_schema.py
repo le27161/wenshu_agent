@@ -5,7 +5,7 @@
 字段校验和 OpenAPI 文档生成交给 Pydantic 与 FastAPI 完成。
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class QuerySchema(BaseModel):
@@ -13,3 +13,6 @@ class QuerySchema(BaseModel):
 
     # 前端请求体中的 query 字段，例如 {"query": "统计华北地区销售额"}
     query: str
+    dataset: str = Field(default="dw", pattern="^(dw|olist)$")
+    principal: dict | None = None
+    conversation_id: str | None = None

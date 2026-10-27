@@ -1,0 +1,12 @@
+name: commerce-insight-agent
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14
+  - pip
+  - nodejs=24
+  - pip:
+      - -e .
+      - pre-commit>=4.3.0
+      - pytest>=8.0.0
+      - ruff>=0.11.0

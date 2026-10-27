@@ -20,6 +20,7 @@ class ColumnMetricMapper:
         return ColumnMetric(
             column_id=column_metric_mysql.column_id,
             metric_id=column_metric_mysql.metric_id,
+            dataset=getattr(column_metric_mysql, "dataset", "dw"),
         )
 
     @staticmethod

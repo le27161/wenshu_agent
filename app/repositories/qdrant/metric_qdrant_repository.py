@@ -19,14 +19,19 @@ class MetricQdrantRepository:
 
     collection_name = "metric_info_collection"
 
-    def __init__(self, client: AsyncQdrantClient):
+    def __init__(self, client: AsyncQdrantClient, dataset: str = "dw"):
         self.client = client
+        self.dataset = dataset
+
+    @property
+    def active_collection_name(self) -> str:
+        return f"{self.collection_name}_{self.dataset}"
 
     async def ensure_collection(self):
         """确保指标向量集合存在，并按当前 Embedding 维度初始化"""
-        if not await self.client.collection_exists(self.collection_name):
+        if not await self.client.collection_exists(self.active_collection_name):
             await self.client.create_collection(
-                collection_name=self.collection_name,
+                collection_name=self.active_collection_name,
                 vectors_config=VectorParams(
                     # 向量维度必须和 Embedding 模型输出一致，否则写入时会失败
                     size=app_config.qdrant.embedding_size,
@@ -49,7 +54,8 @@ class MetricQdrantRepository:
         ]
         for i in range(0, len(points), batch_size):
             await self.client.upsert(
-                collection_name=self.collection_name, points=points[i : i + batch_size]
+                collection_name=self.active_collection_name,
+                points=points[i : i + batch_size],
             )
 
     async def search(
@@ -58,7 +64,7 @@ class MetricQdrantRepository:
         """按向量相似度检索指标元数据，并还原为 MetricInfo 实体"""
 
         result = await self.client.query_points(
-            collection_name=self.collection_name,
+            collection_name=self.active_collection_name,
             query=embedding,
             limit=limit,
             score_threshold=score_threshold,

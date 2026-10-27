@@ -35,6 +35,7 @@ async def merge_retrieved_info(
         retrieved_column_infos: list[ColumnInfo] = state["retrieved_column_infos"]
         retrieved_metric_infos: list[MetricInfo] = state["retrieved_metric_infos"]
         retrieved_value_infos: list[ValueInfo] = state["retrieved_value_infos"]
+        dataset = state.get("dataset", "dw")
 
         meta_mysql_repository = runtime.context["meta_mysql_repository"]
 
@@ -58,10 +59,11 @@ async def merge_retrieved_info(
                 if relevant_column not in retrieved_column_infos_map:
                     column_info: ColumnInfo = (
                         await meta_mysql_repository.get_column_info_by_id(
-                            relevant_column
+                            relevant_column, dataset
                         )
                     )
-                    retrieved_column_infos_map[relevant_column] = column_info
+                    if column_info:
+                        retrieved_column_infos_map[relevant_column] = column_info
 
         # 3. 把字段取值合并回字段 examples
         # 字段取值召回命中的是 column_id + value，例如 dim_region.region_name.华北。
@@ -71,10 +73,11 @@ async def merge_retrieved_info(
             column_id = retrieved_value_info.column_id
             if column_id not in retrieved_column_infos_map:
                 column_info: ColumnInfo = (
-                    await meta_mysql_repository.get_column_info_by_id(column_id)
+                    await meta_mysql_repository.get_column_info_by_id(column_id, dataset)
                 )
-                retrieved_column_infos_map[column_id] = column_info
-            if value not in retrieved_column_infos_map[column_id].examples:
+                if column_info:
+                    retrieved_column_infos_map[column_id] = column_info
+            if column_id in retrieved_column_infos_map and value not in retrieved_column_infos_map[column_id].examples:
                 retrieved_column_infos_map[column_id].examples.append(value)
 
         # 4. 按表组织字段上下文
@@ -93,7 +96,7 @@ async def merge_retrieved_info(
         for table_id in table_to_columns_map.keys():
             key_columns: list[
                 ColumnInfo
-            ] = await meta_mysql_repository.get_key_columns_by_table_id(table_id)
+            ] = await meta_mysql_repository.get_key_columns_by_table_id(table_id, dataset)
             column_ids = [
                 column_info.id for column_info in table_to_columns_map[table_id]
             ]
@@ -107,8 +110,10 @@ async def merge_retrieved_info(
         table_infos: list[TableInfoState] = []
         for table_id, column_infos in table_to_columns_map.items():
             table_info: TableInfo = await meta_mysql_repository.get_table_info_by_id(
-                table_id
+                table_id, dataset
             )
+            if table_info is None:
+                continue
             columns = [
                 ColumnInfoState(
                     name=column_info.name,

@@ -15,8 +15,10 @@ from app.clients.es_client_manager import es_client_manager
 from app.clients.mysql_client_manager import (
     dw_mysql_client_manager,
     meta_mysql_client_manager,
+    olist_mysql_client_manager,
 )
 from app.clients.qdrant_client_manager import qdrant_client_manager
+from app.repositories.mysql.meta.meta_mysql_repository import MetaMySQLRepository
 
 
 @asynccontextmanager
@@ -29,6 +31,11 @@ async def lifespan(app: FastAPI):
     es_client_manager.init()
     meta_mysql_client_manager.init()
     dw_mysql_client_manager.init()
+    olist_mysql_client_manager.init()
+
+    async with meta_mysql_client_manager.session_factory() as session:
+        await MetaMySQLRepository(session).ensure_enterprise_schema()
+        await session.commit()
 
     # yield 之前是启动逻辑，yield 之后是关闭逻辑；中间阶段由 FastAPI 正常处理请求
     yield
@@ -38,3 +45,4 @@ async def lifespan(app: FastAPI):
     await es_client_manager.close()
     await meta_mysql_client_manager.close()
     await dw_mysql_client_manager.close()
+    await olist_mysql_client_manager.close()
